@@ -1,7 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#1e3a5f"/>
-  <path d="M19 12h19l9 9v31H19z" fill="#ffffff"/>
-  <path d="M38 12v10h9" fill="#cbd5e1"/>
-  <path d="M25 29h16M25 36h12M25 43h9" stroke="#1e3a5f" stroke-width="3" stroke-linecap="round"/>
-  <path d="M17 49 48 18" stroke="#dc2626" stroke-width="6" stroke-linecap="round"/>
-</svg>
+_ > nanoagent.plugin.manifest.ProductConfig:
+tagline: "Explain which simplified .gitignore rule determines every file's final status"
+
+summary: "Given root .gitignore contents and a list of repository-relative paths, the agent determines whether each path is ignored or included. It identifies the final matching pattern under a documented subset of .gitignore behavior: exact paths, * wildcards, directory patterns, and ! negation. A deterministic verifier independently applies the same documented rules and checks every submitted path, status, rule number, and winning pattern."
+
+highlights:
+  - "Offline and reproducible: every task uses supplied .gitignore text and candidate paths"
+  - "Supports exact paths, * wildcards, directory patterns ending in /, and ! negation"
+  - "Explains every decision with the final matching pattern and its pattern-only rule number"
+  - "Deterministic all-or-nothing verification with precise mismatch diagnostics"
+
+steps:
+  - "Provide .gitignore contents and one or more normalized repository-relative candidate paths"
+  - "The agent evaluates patterns from top to bottom; the last matching supported rule wins"
+  - "Review the ignored or included status, rule number, and winning pattern for every path"

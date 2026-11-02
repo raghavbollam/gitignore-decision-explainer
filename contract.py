@@ -13,7 +13,7 @@ class Tool(Enum):
 
 
 class Task(Enum):
-    EXPLAIN_DECISIONS = "explain_decisions"
+    EXPLAIN_DECISIONS = "explain-decisions"
 
 
 class DecisionStatus(Enum):
@@ -59,7 +59,7 @@ class WriteDecisionsInput(Output):
 
 @dataclass
 class WriteDecisionsOutput(Output):
-    report_path: Annotated[str, "The path to the report file that was written, relative to the repository root."]
+    report_path: Annotated[str, "The path to the report file that was written, relative to the workspace."]
     report: GitIgnoreDecisionOutput
 
 

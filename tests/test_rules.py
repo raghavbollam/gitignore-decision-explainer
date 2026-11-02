@@ -84,6 +84,48 @@ def test_wildcards_and_directory_rules_apply_to_nested_paths() -> None:
     ]
 
 
+def test_empty_gitignore_includes_with_null_metadata() -> None:
+    decisions = evaluate_paths("", ["notes.txt"])
+
+    assert [
+        (
+            decision.status,
+            decision.winning_rule,
+            decision.winning_pattern,
+        )
+        for decision in decisions
+    ] == [(DecisionStatus.INCLUDED, None, None)]
+
+
+def test_lone_negation_is_ignored_and_not_numbered() -> None:
+    rules = parse_rules("!\n*.log\n")
+
+    assert [
+        (rule.number, rule.pattern, rule.is_negation)
+        for rule in rules
+    ] == [(1, "*.log", False)]
+
+
+def test_later_ignore_rule_overrides_prior_negation() -> None:
+    decision = evaluate_paths("*.log\n!important.log\nimportant.log\n", ["important.log"])[0]
+
+    assert (
+        decision.status,
+        decision.winning_rule,
+        decision.winning_pattern,
+    ) == (DecisionStatus.IGNORED, 3, "important.log")
+
+
+def test_directory_rule_matches_exact_directory_candidate() -> None:
+    decision = evaluate_paths("cache/\n", ["cache"])[0]
+
+    assert (
+        decision.status,
+        decision.winning_rule,
+        decision.winning_pattern,
+    ) == (DecisionStatus.IGNORED, 1, "cache/")
+
+
 def test_basic_fixture_matches_expected_decisions() -> None:
     input_data = json.loads(
         (FIXTURES / "basic-case-input.json").read_text(encoding="utf-8")
