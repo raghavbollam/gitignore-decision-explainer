@@ -127,5 +127,5 @@ def test_registered_verifier_dispatches_to_task_verifier(tmp_path: Path) -> None
         workspace=tmp_path,
     )
 
-    assert result.ok is True
-    assert result.score == 1.0
+    assert result["valid"] is True
+    assert result["score"] == 1.0

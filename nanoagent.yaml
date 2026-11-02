@@ -1,25 +1,27 @@
-_ > nanoagent.plugin.manifest.ManifestConfig:
+_ > nanoagent.plugin.v0001.ManifestConfig:
 id: gitignore-decision-explainer
 name: Gitignore Decision Explainer
 version: 0.1.0
-status: draft
-nanoagent: ~=0.5.0
+status: ready
+spec: nanoagent.plugin/v0001
 
-runtime > nanoagent.plugin.manifest.RuntimeConfig:
+runtime > nanoagent.plugin.v0001.RuntimeConfig:
   type: mcp_stdio
   command: [uv, run, --frozen, python, -m, plugin]
 
-permissions > nanoagent.plugin.manifest.PermissionsConfig:
-  filesystem > nanoagent.plugin.manifest.FilesystemConfig:
+permissions > nanoagent.plugin.v0001.PermissionsConfig:
+  network > nanoagent.plugin.v0001.NetworkConfig:
+    hosts: []
+  filesystem > nanoagent.plugin.v0001.FilesystemConfig:
     write: [workspace]
 
-tools > dict[contract.Tool, nanoagent.plugin.manifest.ToolConfig]:
+tools > dict[contract.Tool, nanoagent.plugin.v0001.ToolConfig]:
   read_case:
     description: Read the .gitignore contents and candidate paths for the current task.
   write_decisions:
     description: Save the final structured ignore decisions for all candidate paths.
 
-tasks > dict[contract.Task, nanoagent.plugin.manifest.TaskConfig]:
+tasks > dict[contract.Task, nanoagent.plugin.v0001.TaskConfig]:
   explain-decisions:
     description: Determine whether each candidate path is ignored or included by a documented subset of .gitignore rules, and report the final rule that decided it.
     runner: agent

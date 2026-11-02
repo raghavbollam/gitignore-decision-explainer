@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from contract import GitIgnoreDecisionInput, GitIgnoreDecisionOutput, PathDecision
-from verifier.rules import evaluate_paths
+from .rules import evaluate_paths
 
 
 @dataclass(frozen=True)

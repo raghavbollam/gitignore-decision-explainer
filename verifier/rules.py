@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from fnmatch import fnmatchcase
+import re
 
 from contract import DecisionStatus, PathDecision
 
@@ -54,7 +54,8 @@ def matches(path: str, rule: IgnoreRule) -> bool:
         directory = pattern[:-1]
         return path == directory or path.startswith(f"{directory}/")
 
-    return fnmatchcase(path, pattern)
+    wildcard_pattern = re.escape(pattern).replace(r"\*", ".*")
+    return re.fullmatch(wildcard_pattern, path) is not None
 
 
 def decide_path(path: str, rules: list[IgnoreRule]) -> PathDecision:

@@ -1,4 +1,4 @@
-_ > nanoagent.plugin.manifest.ProductConfig:
+_ > nanoagent.plugin.v0001.ProductConfig:
 tagline: "Explain which simplified .gitignore rule determines every file's final status"
 
 summary: "Given root .gitignore contents and a list of repository-relative paths, the agent determines whether each path is ignored or included. It identifies the final matching pattern under a documented subset of .gitignore behavior: exact paths, * wildcards, directory patterns, and ! negation. A deterministic verifier independently applies the same documented rules and checks every submitted path, status, rule number, and winning pattern."
