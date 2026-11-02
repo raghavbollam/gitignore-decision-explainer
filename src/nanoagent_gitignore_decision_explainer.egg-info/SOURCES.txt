@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/nanoagent_gitignore_decision_explainer.egg-info/PKG-INFO
+src/nanoagent_gitignore_decision_explainer.egg-info/SOURCES.txt
+src/nanoagent_gitignore_decision_explainer.egg-info/dependency_links.txt
+src/nanoagent_gitignore_decision_explainer.egg-info/requires.txt
+src/nanoagent_gitignore_decision_explainer.egg-info/top_level.txt
+src/plugin/__init__.py
+src/plugin/__main__.py
+src/plugin/tools.py
+tests/test_tools.py
